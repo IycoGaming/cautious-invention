@@ -1,6 +1,37 @@
 
 'use strict';
+// SAFE BOOT PATCH
+window.addEventListener('DOMContentLoaded', () => {
 
+  // अगर App.navigate missing है तो dummy बना दे
+  if (!window.App) window.App = {};
+
+  const originalNavigate = App.navigate;
+
+  App.navigate = function(screen) {
+    try {
+      if (originalNavigate) {
+        originalNavigate(screen);
+      } else {
+        console.log("Navigate fallback:", screen);
+      }
+    } catch (e) {
+      console.warn("Screen not found:", screen);
+
+      // fallback screen
+      if (originalNavigate) {
+        originalNavigate('focus');
+      }
+    }
+  };
+
+  // force load default screen
+  setTimeout(() => {
+    if (App.navigate) {
+      App.navigate('focus');
+    }
+  }, 100);
+});
 /* ============================================================
    DB MODULE - localStorage abstraction
    ============================================================ */
