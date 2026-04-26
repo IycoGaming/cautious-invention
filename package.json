@@ -1,0 +1,11 @@
+{
+  "name": "dsv2",
+  "version": "1.0.0",
+  "description": "DSv2 App",
+  "main": "app.js",
+  "scripts": {},
+  "dependencies": {
+    "@capacitor/core": "^5.0.0",
+    "@capacitor/android": "^5.0.0"
+  }
+}
