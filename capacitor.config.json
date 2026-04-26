@@ -2,5 +2,4 @@
   "appId": "com.sanctuary.dsv2",
   "appName": "DSv2",
   "webDir": ".",
-  "bundledWebRuntime": false
 }
