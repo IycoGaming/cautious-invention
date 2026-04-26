@@ -22,18 +22,24 @@ jobs:
 
       - uses: android-actions/setup-android@v3
 
-      # 🔥 IMPORTANT: install all capacitor packages
       - name: Install deps
         run: npm install @capacitor/core @capacitor/cli @capacitor/android
 
-      # init capacitor (VERY IMPORTANT)
-      - name: Init Capacitor
-        run: npx cap init "DSv2" "com.sanctuary.dsv2" --web-dir=.
+      # 🔥 FIX: create proper webDir
+      - name: Prepare web files
+        run: |
+          mkdir www
+          cp index.html www/index.html
+          cp style.css www/style.css
+          cp app.js www/app.js
 
-      - name: Add Android platform
+      - name: Init Capacitor
+        run: npx cap init "DSv2" "com.sanctuary.dsv2" --web-dir=www
+
+      - name: Add Android
         run: npx cap add android
 
-      - name: Sync Capacitor
+      - name: Sync
         run: npx cap sync android
 
       - name: Build APK
